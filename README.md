@@ -26,7 +26,29 @@ conda env create -f conda_requirements.yaml
 
 ### Weights and Biases Setup
 We use [w&b](https://wandb.ai) to track experiments, save and load trained models, thus it is required to run the code. 
-Variables `USER`, `PROJECT` and `API_KEY` in the `utils/wandb.py` script should be specified before running the experiments.  
+Variables `entity`, `project` and `api_key` in the `configs/wandb/defaults.yaml` file should be specified before running the experiments.  
+
+### Run experiments
+Configuration for all the experiments are provided in `configs/experiments` folder. 
+
+For example, to run the experiment with the MNIST dataset and the DCT-based hierarchical VAE, run the following command:
+```bash
+python -u run_experiment.py experiment=mnist_dct_ladder
+```
+
+We use 4-GPUs to train model on the CIFAR-10 dataset (make sure that `train.ddp: True`):
+```bash
+mpiexec -n 4 python -u run_experiment.py experiment=cifar_dct_ladder
+```
+
+### Pre-trained model
+
+Dataset | Model        | Test NLL/BPD | Link
+--- |--------------|--------------| --- 
+MNIST | DCT-VAE | 76.62        | [link](https://drive.google.com/file/d/1RZWo7jDjA3pPcfZ--qxtBc7GpsOH0Ea4/view?usp=sharing)
+OMNIGLOT | DCT-VAE   | 86.11        | [link](https://drive.google.com/file/d/1RbOsL4nyF3nvaO3-n0YoqwejBYSNmvww/view?usp=sharing)
+CIFAR-10 | DCT-VAE   | 3.26         | [link](https://drive.google.com/file/d/1Rbl7X09Gr4zXSuUQvuwHcYEjpopeb9Uq/view?usp=sharing)
+SVHN | DCT-VAE   | 1.97         | [link](https://drive.google.com/file/d/1RbwLj0EO7RwfiPqLiL0NwMAsSGzCWyqd/view?usp=sharing)
 
 ### Cite
 If you found this work useful in your research, please consider citing:

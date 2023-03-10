@@ -1,0 +1,30 @@
+defaults:
+  - z_L_prior: null
+
+_target_: model.context_decoder.ContextLadderDecoder
+arch_mode: delta  # ['delta', 'separate']
+num_blocks_per_scale: 1  # number of resnet blocks after each latent variable
+num_postprocess_blocks: 1  # number of resnet blocks after the 'last' (z_1) latent variables
+var_mode: log  # log or Softplus
+softplus_beta: 1
+disconnect: False
+z_L_bits: None
+ctx_type: dct
+condition_on_last: False
+ctx_size: ${model.ctx_size}
+ctx_posterior_var: fixed  # fixed, train, conditional. Train - the same variance for all point, conditional - NN outputs the variance
+ctx_posterior_var_init: -10  # the value to init the posterior variance (in log scale)
+#add_y_last: False
+num_ch: ${model.num_ch}
+scale_ch_mult: ${model.scale_ch_mult}
+block_ch_mult: ${model.block_ch_mult}
+data_ch: ${dataset.image_size[0]}
+data_dim: ${dataset.image_size[1]}
+latent_scales: ${model.latent_scales}
+latent_width: ${model.latent_width}
+weight_norm: ${model.weight_norm}
+batch_norm: ${model.batch_norm}
+likelihood: ${model.likelihood}
+num_mix: ${model.num_mix}
+activation: ${model.activation}
+start_scale_at_x: ${model.start_scale_at_x}

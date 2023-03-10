@@ -1,0 +1,92 @@
+# @package _global_
+defaults:
+  - override /dataset: svhn
+  - override /model: context_ladder_vae
+  - override /model/encoder: small_ladder
+  - override /model/decoder: context_ladder
+  - override /model/decoder/z_L_prior: ddgm
+  - override /train/optimizer: adamW
+  - override /train/scheduler: cosine
+
+dataset:
+  data_module:
+    batch_size: 96
+    test_batch_size: 256
+    ctx_size: null
+model:
+  latent_scales:
+    - 5
+    - 5
+    - 5
+    - 2
+    - 0
+    - 1
+  latent_width:
+    - 8
+    - 8
+    - 8
+    - 8
+    - 0
+    - 8
+  ctx_size: 6
+  batch_norm: False
+  weight_norm: True
+  num_ch: 300
+  scale_ch_mult: 1
+  block_ch_mult: 0.25
+  likelihood: logistic_mixture
+  num_mix: 10
+  beta_start: 1
+  beta_end: 1
+  warmup: 0
+  is_k: 100
+  activation: silu
+  free_bits_thr: 0
+  start_scale_at_x: True
+  encoder:
+    num_init_blocks: 0
+    num_blocks_per_scale: 1
+  decoder:
+    disconnect: False
+    condition_on_last: True
+    arch_mode: 'separate'
+    num_blocks_per_scale: 1
+    num_postprocess_blocks: 0
+    var_mode: softplus
+    softplus_beta: 0.7
+    ctx_type: dct
+    ctx_posterior_var: delta
+    z_L_bits: 5
+    z_L_prior:
+      model:
+        model_channels: 64
+        num_res_blocks: 3
+        dropout: 0.2
+        num_heads: 2
+        channel_mult:
+          - 1
+          - 1
+      T: 40
+      beta_schedule: cosine
+      t_sample: uniform
+      parametrization: x
+      ll: discretized_gaussian
+train:
+  seed: 123
+  resume_id: null
+  loss_per_pixel: True
+  ema_rate: 0
+  acc_grad: 1
+  grad_clip: 1
+  grad_skip_thr: 400
+  max_epochs: 1200
+  early_stopping_epochs: 100
+  device: 'cuda'
+  eval_freq: 2
+  ddp: False
+  compute_fid: False
+  optimizer:
+    lr: 0.0004
+    weight_decay: 0.01
+  scheduler:
+    eta_min: 0.00005

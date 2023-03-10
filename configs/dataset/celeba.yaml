@@ -1,0 +1,21 @@
+---
+data_module:
+  _target_: datasets.celeba.CelebA
+  batch_size: 64
+  test_batch_size: 1024
+  model: ${model.name}
+  ctx_size: null
+  mode: RGB
+  size: 64
+image_size:
+  - 3
+  - ${dataset.data_module.size}
+  - ${dataset.data_module.size}
+n_classes:
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+name: celeba

@@ -1,0 +1,78 @@
+# @package _global_
+defaults:
+  - override /dataset: omniglot
+  - override /model: context_ladder_vae
+  - override /model/decoder: context_ladder
+  - override /model/decoder/z_L_prior: ddgm
+  - override /train/optimizer: adamW
+  - override /train/scheduler: cosine
+
+dataset:
+  data_module:
+    batch_size: 128
+    test_batch_size: 512
+model:
+  latent_scales:
+    - 4
+    - 3
+  latent_width:
+    - 1
+    - 1
+  ctx_size: 8
+  batch_norm: False
+  weight_norm: False
+  likelihood: bernoulli
+  num_ch: 32
+  beta_start: 1
+  beta_end: 1
+  warmup: 0
+  is_k: 1000
+  activation: silu
+  scale_ch_mult: 1
+  block_ch_mult: 1
+  free_bits_thr: 0
+  encoder:
+    num_init_blocks: 0
+    num_blocks_per_scale: 1
+  decoder:
+    disconnect: False
+    arch_mode: 'separate'
+    num_blocks_per_scale: 1
+    num_postprocess_blocks: 0
+    var_mode: softplus
+    softplus_beta: 0.7
+    ctx_type: dct
+    ctx_posterior_var: delta
+    z_L_bits: 2
+    z_L_prior:
+      model:
+        model_channels: 32
+        num_res_blocks: 3
+        dropout: 0.1
+        num_heads: 2
+        channel_mult:
+          - 1
+      T: 7
+      beta_schedule: linear
+      t_sample: uniform
+      parametrization: x
+train:
+  seed: 123
+  resume_id: null
+  ema_rate: 0
+  acc_grad: 1
+  grad_clip: 1
+  grad_skip_thr: 100
+  max_epochs: 600
+  early_stopping_epochs: 300
+  device: 'cuda'
+  eval_freq: 1
+  ddp: False
+  compute_fid: False
+  optimizer:
+    lr: 0.001
+    weight_decay: 1e-2
+  scheduler:
+    eta_min: 0.00001
+    T_max: 600
+

@@ -1,0 +1,63 @@
+# @package _global_
+defaults:
+  - override /dataset: mnist
+  - override /model: ladder_vae
+  - override /model/decoder/z_L_prior: gaussian
+  - override /train/optimizer: adamW
+  - override /train/scheduler: cosine
+
+dataset:
+  data_module:
+    batch_size: 128
+    test_batch_size: 512
+    ctx_size: null
+model:
+  latent_scales:
+    - 4
+    - 4
+  latent_width:
+    - 1
+    - 1
+  batch_norm: False
+  weight_norm: False
+  likelihood: bernoulli
+  num_ch: 32
+  beta_start: 1
+  beta_end: 1
+  warmup: 0
+  is_k: 1000
+  activation: silu
+  scale_ch_mult: 1.25
+  block_ch_mult: 1
+  free_bits_thr: 0
+  start_scale_at_x: False
+  encoder:
+    num_init_blocks: 0
+    num_blocks_per_scale: 1
+  decoder:
+    disconnect: False
+    arch_mode: 'separate'
+    num_blocks_per_scale: 1
+    num_postprocess_blocks: 0
+    var_mode: softplus
+    softplus_beta: 0.7
+train:
+  seed: 123
+  ema_rate: 0
+  acc_grad: 1
+  grad_clip: 1
+  grad_skip_thr: 100
+  max_epochs: 600
+  early_stopping_epochs: 300
+  device: 'cuda:0'
+  eval_freq: 1
+  ddp: False
+  compute_fid: False
+  optimizer:
+    lr: 0.001
+    weight_decay: 1e-2
+  scheduler:
+    eta_min: 0.00001
+    T_max: 600
+
+

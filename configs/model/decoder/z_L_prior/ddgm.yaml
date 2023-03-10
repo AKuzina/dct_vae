@@ -1,0 +1,24 @@
+---
+_target_: model.ddgm.DiffusionPrior
+model:
+  _target_: utils.thirdparty.unet.UNetModel
+  image_size: null
+  in_channels: null
+  out_channels: null
+  model_channels: 64
+  num_res_blocks: 5
+  dropout: 0.1
+  num_heads: 4
+  channel_mult:
+    - 1
+    - 0.25
+  use_scale_shift_norm: True
+  attention_resolutions: tuple([])
+num_bits: ${model.decoder.z_L_bits}
+T: 100
+beta_schedule: cosine
+t_sample: loss_aware
+parametrization: x
+ll: discretized_gaussian
+use_noise_scale: False
+

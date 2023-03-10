@@ -1,0 +1,10 @@
+---
+setup:
+  project: context_vae #null
+  entity: anna_jakub
+  mode: online
+watch:
+  log: gradients
+  log_freq: 1000
+api_key: null
+group: null
