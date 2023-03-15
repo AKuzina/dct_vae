@@ -2,7 +2,7 @@
 
 This repository contains the code for the experiments from the paper:
 
-[Analyzing the Posterior Collapse in Hierarchical Variational Autoencoders]()
+[Analyzing the Posterior Collapse in Hierarchical Variational Autoencoders](https://arxiv.org/abs/2302.09976v1)
 
 **[Anna Kuzina](https://akuzina.github.io/), [Jakub M. Tomczak](https://jmtomczak.github.io/)**
 
