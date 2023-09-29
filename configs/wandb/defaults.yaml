@@ -1,7 +1,7 @@
 ---
 setup:
-  project: context_vae #null
-  entity: anna_jakub
+  project: null
+  entity: null
   mode: online
 watch:
   log: gradients

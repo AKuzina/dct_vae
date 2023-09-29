@@ -1,8 +1,8 @@
-# Analyzing the Posterior Collapse in Hierarchical Variational Autoencoders
+# Discouraging Posterior Collapse in Hierarchical Variational Autoencoders Using Context
 
 This repository contains the code for the experiments from the paper:
 
-[Analyzing the Posterior Collapse in Hierarchical Variational Autoencoders](https://arxiv.org/abs/2302.09976v1)
+[Discouraging Posterior Collapse in Hierarchical Variational Autoencoders Using Context](https://arxiv.org/abs/2302.09976)
 
 **[Anna Kuzina](https://akuzina.github.io/), [Jakub M. Tomczak](https://jmtomczak.github.io/)**
 
@@ -12,8 +12,12 @@ This repository contains the code for the experiments from the paper:
 <tr>
 <td style="width:100%">
 <i>
-Hierarchical Variational Autoencoders (VAEs) are among the most popular likelihood-based generative models. There is rather a consensus that the top-down hierarchical VAEs allow to effectively learn deep latent structures and avoid problems like the posterior collapse. Here, we show that it is not necessarily the case and the problem of collapsing posteriors remains. To discourage the posterior collapse, we propose a new deep hierarchical VAE with a partly fixed encoder, specifically, we use Discrete Cosine Transform to obtain top latent variables.
-In a series of experiments, we observe that the proposed modification allows us to achieve better utilization of the latent space. Further, we demonstrate that the proposed approach can be useful for compression and robustness to adversarial attacks. 
+Hierarchical Variational Autoencoders (VAEs) are among the most popular likelihood-based generative models. 
+There is a consensus that the top-down hierarchical VAEs allow effective learning of deep latent structures and avoid problems like posterior collapse. 
+Here, we show that this is not necessarily the case, and the problem of collapsing posteriors remains. 
+To discourage this issue, we propose a deep hierarchical VAE with a context on top. 
+Specifically, we use a Discrete Cosine Transform to obtain the last latent variable.
+In a series of experiments, we observe that the proposed modification allows us to achieve better utilization of the latent space and does not harm the model's generative abilities. 
 </i>
 </table>
 
@@ -48,14 +52,14 @@ Dataset | Model        | Test NLL/BPD | Link
 MNIST | DCT-VAE | 76.62        | [link](https://drive.google.com/file/d/1RZWo7jDjA3pPcfZ--qxtBc7GpsOH0Ea4/view?usp=sharing)
 OMNIGLOT | DCT-VAE   | 86.11        | [link](https://drive.google.com/file/d/1RbOsL4nyF3nvaO3-n0YoqwejBYSNmvww/view?usp=sharing)
 CIFAR-10 | DCT-VAE   | 3.26         | [link](https://drive.google.com/file/d/1Rbl7X09Gr4zXSuUQvuwHcYEjpopeb9Uq/view?usp=sharing)
-SVHN | DCT-VAE   | 1.97         | [link](https://drive.google.com/file/d/1RbwLj0EO7RwfiPqLiL0NwMAsSGzCWyqd/view?usp=sharing)
+<!-- SVHN | DCT-VAE   | 1.97         | [link](https://drive.google.com/file/d/1RbwLj0EO7RwfiPqLiL0NwMAsSGzCWyqd/view?usp=sharing) -->
 
 ### Cite
 If you found this work useful in your research, please consider citing:
 
 ```text
-@article{kuzina2022alleviating,
-  title={Analyzing the Posterior Collapse in Hierarchical Variational Autoencoders},
+@article{kuzina2023discouraging,
+  title={Discouraging Posterior Collapse in Hierarchical Variational Autoencoders Using Context},
   author={Kuzina, Anna and Tomczak, Jakub M},
   journal={},
   year={2023}
